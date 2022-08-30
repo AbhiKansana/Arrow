@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TodoForm from './TodoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti'
-import { Box, Icon } from '@chakra-ui/react';
+import { Box, Icon, Text } from '@chakra-ui/react';
 import {FaLongArrowAltRight} from 'react-icons/fa'
 import { useDispatch } from 'react-redux';
 import { currentTodo } from '../../Redux/actions';
@@ -34,20 +34,22 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
       className={todo.status ? 'todo-row complete' : 'todo-row'}
       key={index}
     >
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+      <Text  fontSize={'18px'}  key={todo.id} onClick={() => completeTodo(todo.id)}>
         {todo.text}
-      </div>
-      <div className='icons'>
-        <RiCloseCircleLine
-          onClick={() => removeTodo(todo.id)}
-          className='delete-icon'
-        />
+      </Text>
+      <div style={{}} className='icons'>
+        
         <TiEdit
-          ml='20px'
+          color='darkgreen'
           onClick={() => setEdit({ id: todo.id, value: todo.text })}
           className='edit-icon'
         />
-        <Icon ml='10px' fontSize={'20px'} onClick={()=>{
+        <RiCloseCircleLine
+          color='red'
+          onClick={() => removeTodo(todo.id)}
+          className='delete-icon'
+        />
+        <Icon  fontSize={'20px'} onClick={()=>{
           dispatch(currentTodo(todo))
           localStorage.setItem("currentObj",JSON.stringify(todo))
           nav('/timer')
